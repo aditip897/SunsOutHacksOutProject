@@ -194,9 +194,11 @@
                 for (var value of formData.values()) {
                     console.log(value);
                 }
+                var data = {"userName" : document.getElementById("userName").value, "pword" : document.getElementById("pword").value };
                 fetch('http://127.0.0.1:4300/api/signup/', {
                     method: 'POST',
-                    body: formData
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
                 })
                     .then(response => response.json())
                     .then(result => {

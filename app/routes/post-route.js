@@ -4,7 +4,7 @@ module.exports = function (app, db) {
     app.post('/api/signup/', (req, res) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
         var user = req.body;
-        console.log(req);
+        console.log(user);
         console.log('inserting');
         insertUser(user, db,res);
     });
