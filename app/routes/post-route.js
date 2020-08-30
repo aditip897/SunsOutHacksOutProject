@@ -36,7 +36,7 @@ function insertUser(user, db,res) {
         db.run(sql, values, function (err) {
             if (err) {
                 console.error(err);
-                res.status(500).send(err);
+                res.send({"success": false});
             }
 
             else{
@@ -63,7 +63,7 @@ function insertAct(act, db,res) {
         db.run(sql, values, function (err) {
             if (err) {
                 console.error(err);
-                res.status(500).send(err);
+                res.send({"success": false});
             }
 
             else

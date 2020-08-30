@@ -187,13 +187,7 @@
         <script>
             var submt = document.getElementById('submt');
             submt.onclick = function () {
-                var formData = new FormData();
-
-                formData.append("userName", document.getElementById("userName").value);
-                formData.append("pword", document.getElementById("pword").value);
-                for (var value of formData.values()) {
-                    console.log(value);
-                }
+                
                 var data = {"userName" : document.getElementById("userName").value, "pword" : document.getElementById("pword").value };
                 fetch('http://127.0.0.1:4300/api/signup/', {
                     method: 'POST',
@@ -202,8 +196,11 @@
                 })
                     .then(response => response.json())
                     .then(result => {
-                        console.log('Success:', result);
-
+                        console.log(result);
+                        if (result.success) {
+                            sessionStorage.setItem("userName", document.getElementById("userName").value);
+                            window.location.href = "mapPage.html";
+                        }
 
                     })
                     .catch(error => {

@@ -1,12 +1,13 @@
 module.exports = function(app, db) {
 
   
-  app.get('/api/login/:id/:password', (req, res) => {
-    processData(res, "SELECT act_name, time_taken, coords FROM user where username == ? and password == ?",[req.params.id,req.params.password]);
+  app.get('/api/login/:uname/:pword', (req, res) => {
+    console.log('logging in');
+    login(db,res, "SELECT act_name, time_taken, coords FROM user where username == ? and password == ?",[req.params.uname,req.params.pword]);
   });
 
   app.get('/api/login/coords', (req, res) => {
-    processData(res, "SELECT act_name, time_taken, coords FROM user ",[]);
+    processData(db,res, "SELECT act_name, time_taken, coords FROM user ",[]);
   });
   
 
@@ -14,7 +15,28 @@ module.exports = function(app, db) {
   
 };
 
-function processData(res, sql,values){
+function login(db,res, sql,values){
+  db.serialize(function() {
+    db.all(sql,values, 
+      function(err, rows) {
+        if(err){
+          console.error(err);
+          res.status(500).send(err);
+        }
+        else{
+          if (rows.length > 0) {
+            res.send({"Success":true});
+          } else {
+            res.send({"Success":false});
+          }
+         
+        }
+          
+    });
+  });
+}
+
+function processData(db,res, sql,values){
   db.serialize(function() {
     db.all(sql,values, 
       function(err, rows) {
