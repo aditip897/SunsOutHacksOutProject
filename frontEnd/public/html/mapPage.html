@@ -84,6 +84,7 @@
         var mins = document.getElementById('minsTxtbx');
         var logoutBtn = document.getElementById('logout');
         var data = {};
+
         navigator.geolocation.getCurrentPosition(function (position) {
             addBtn.style.display = 'inline-flex';
             var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13)
@@ -95,12 +96,13 @@
             // addBtn.onclick = function () {
             saveBtn.addEventListener("click", function () {
                 mdl.close();
-                data = {"userName" : window.sessionStorage.getItem("userName"), "actName" : activityName.value, "hrs":hrs.value,"mins":mins.value,"lat":position.coords.latitude,"long":position.coords.longitude};
+                data = { "userName": window.sessionStorage.getItem("userName"), "actName": activityName.value, "hrs": hrs.value, "mins": mins.value, "lat": position.coords.latitude, "long": position.coords.longitude };
                 L.marker([position.coords.latitude, position.coords.longitude]).bindPopup('Activity: ' + activityName.value + '\n' + '| Time: ' + hrs.value + 'hrs ' + mins.value + 'mins').addTo(mymap);
                 clearTxtbx()
                 saveActivity(data);
                 //make post request
             });
+            getActivities(L, mymap);
 
             // console.log(position.coords.latitude);
             // console.log(position.coords.longitude);
@@ -136,6 +138,24 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }
+
+        function getActivities(L, map) {
+            fetch('http://127.0.0.1:4300/api/getacts/', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                result.forEach(element => {
+                    L.marker([element.lat, element.long]).bindPopup('Activity: ' + element.act_name + ' | Time: ' + element.time_taken).addTo(map);
+                });
+                
+
+            })
+            .catch(error => {
+                console.error('Error:', JSON.stringify(error));
+            });
         }
 
     </script>

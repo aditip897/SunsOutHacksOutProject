@@ -6,8 +6,8 @@ module.exports = function(app, db) {
     login(db,res, "SELECT username FROM user where username == ? and password == ?",[req.params.uname,req.params.pword]);
   });
 
-  app.get('/api/getcoords', (req, res) => {
-    processData(db,res, "SELECT act_name, time_taken, coords FROM user ",[]);
+  app.get('/api/getacts', (req, res) => {
+    processData(db,res, "SELECT act_name, time_taken, lat, long FROM user ",[]);
   });
   
 
@@ -46,7 +46,7 @@ function processData(db,res, sql,values){
         }
         else {
           if (rows.length > 0) {
-            res.send(data);
+            res.send(rows);
           } else {
             res.send({"data": false});
           }
