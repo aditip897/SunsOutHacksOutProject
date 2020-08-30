@@ -1,0 +1,74 @@
+body {
+    background-color: #1baeb1;  
+}
+#title { 
+    color:#f7fd80;
+    font-family: 'Exo', sans-serif;
+    text-align: center;
+    justify-items: center;
+    align-content: center;
+    margin-top:7rem;
+    font-size: 30px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 90%, 0 100%);
+
+    
+}
+
+
+.slogan {
+    text-align: center;
+    font-family:'Poppins', sans-serif;
+
+    font-size:20px;
+
+}
+
+#ourpurpose h2 { 
+    font-family: 'Poppins';
+    font-size:30px;
+    color:white;
+}
+
+#ourpurpose p {
+    font-family: 'Poppins';
+    font-size:17px;
+    columns: #4c7031
+}
+
+/*
+
+f2ae1c
+backgrou
+    4c7031
+    fitness dradr font
+
+000000 black*/
+
+
+.topnav {
+    background-color: 1baeb1;
+    overflow: hidden;
+    
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f7fd80;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #1baeb1;
+    color: white;
+  }
+
