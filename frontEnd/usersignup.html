@@ -201,34 +201,6 @@ input [type="submit"]:hover {
         
         
                 
-            
-
-        <script>
-
-            var signupform = document.getElementById("signup");
-            
-            document.querySelector('.btn').onclick=function() {
-               var password = document.querySelector('.password').value,
-               confirmPassword = document.querySelector('.confirmPassword').value;
-                
-
-                
-                if(password != confirmPassword) { 
-                    alert("Passwords don't match.");
-                }
-                
-                else if(password != "" && confirmPassword != ""){
-                	
-                	signupform.submit();
-                	
-                }
-                
-                
-               
-            }
-
-  
-        </script>
     
     
     
