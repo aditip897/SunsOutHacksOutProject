@@ -51,10 +51,11 @@ function insertAct(act, db,res) {
     var userName = act.userName;
     var act_name  = act.actName;
     var time_taken = act.hrs+"hrs "+act.mins+"mins" ;
-    var coords = act.coords;
+    var lat = act.lat;
+    var long = act.long;
     
 
-    var sql = `update user set act_name = ?, time_taken = ?, coords = ? 
+    var sql = `update user set act_name = ?, time_taken = ?, lat = ?, long = ?,
             where username = ?;`;
 
     var values = [act_name, time_taken, coords, userName];

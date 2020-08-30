@@ -14,6 +14,15 @@
 
 <body>
     <section class="hero is-light is-fullheight">
+        <div class="hero-head">
+            <div class="is-fullwidth">
+                <div class="container">
+                   
+                    <button id="logout" class="button is-rounded is-small">Logout</button>
+                    
+                </div>
+            </div>
+        </div>
         <!-- Hero content: will be in the middle -->
         <div class="hero-body">
             <div class="container has-text-centered" id="mapid">
@@ -40,8 +49,8 @@
                 <section class="modal-card-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input is-primary" type="text" id="nameTxtbx" name="actName" placeholder="Name of activity"
-                                required>
+                            <input class="input is-primary" type="text" id="nameTxtbx" name="actName"
+                                placeholder="Name of activity" required>
                         </div>
                     </div>
                     <div class="field">
@@ -52,8 +61,8 @@
                     </div>
                     <div class="field">
                         <div class="control">
-                            <input class="input is-info" type="number" id="minsTxtbx" name="min" max="59" min="0" value="0"
-                                placeholder="Minutes spent being awesome" required>
+                            <input class="input is-info" type="number" id="minsTxtbx" name="min" max="59" min="0"
+                                value="0" placeholder="Minutes spent being awesome" required>
 
 
 
@@ -73,6 +82,8 @@
         var activityName = document.getElementById('nameTxtbx');
         var hrs = document.getElementById('hrsTxtbx');
         var mins = document.getElementById('minsTxtbx');
+        var logoutBtn = document.getElementById('logout');
+
         navigator.geolocation.getCurrentPosition(function (position) {
             addBtn.style.display = 'inline-flex';
             var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13)
@@ -100,6 +111,15 @@
             activityName.value = '';
             hrs.value = 0;
             mins.value = 0;
+        }
+
+        logoutBtn.onclick = function () {
+            window.sessionStorage.clear();
+            window.location.href = 'login.html'
+        }
+
+        function name(params) {
+            
         }
 
     </script>
