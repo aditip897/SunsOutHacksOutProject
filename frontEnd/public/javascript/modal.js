@@ -57,15 +57,10 @@ btn.addEventListener("click", function () {
     console.log('hello world')
     mdl.show()
 })
-saveBtn.addEventListener("click", function () {
 
-    mdl.close();
-    //make post request
-
-
-})
 cnclBtn.addEventListener("click", function () {
     mdl.close();
+    clearTxtbx()
 })
 
 mdl.addEventListener('modal:show', function () {

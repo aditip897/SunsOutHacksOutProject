@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <link rel="stylesheet" href="../css/map.css">
+    <link rel="stylesheet" href="css/map.css">
 
 </head>
 
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-
+    <script src="js/modal.js"></script>
     <script>
         var addBtn = document.getElementById('addBtn');
         var activityName = document.getElementById('nameTxtbx');
@@ -81,19 +81,29 @@
                 attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                 subdomains: ['a', 'b', 'c']
             }).addTo(mymap)
-            addBtn.onclick = function () {
-                L.marker([position.coords.latitude, position.coords.longitude]).bindPopup('You').addTo(mymap);
-                // console.log(position.coords.latitude);
-                // console.log(position.coords.longitude);
-            }
+            // addBtn.onclick = function () {
+            saveBtn.addEventListener("click", function () {
+                mdl.close();
+                L.marker([position.coords.latitude, position.coords.longitude]).bindPopup('Activity: ' + activityName.value + '\n' + '| Time: ' + hrs.value + 'hrs ' + mins.value + 'mins').addTo(mymap);
+                clearTxtbx()
+                //make post request
+            });
+
+            // console.log(position.coords.latitude);
+            // console.log(position.coords.longitude);
+            // }
             //function to load markers that were previously saved
 
         });
 
-        
+        function clearTxtbx() {
+            activityName.value = '';
+            hrs.value = 0;
+            mins.value = 0;
+        }
 
     </script>
-    <script src="../javascript/modal.js"></script>
+
 </body>
 
 </html>
