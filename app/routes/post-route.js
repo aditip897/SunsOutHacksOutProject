@@ -48,6 +48,7 @@ function insertUser(user, db,res) {
 }
 
 function insertAct(act, db,res) {
+    console.log(act);
     var userName = act.userName;
     var act_name  = act.actName;
     var time_taken = act.hrs+"hrs "+act.mins+"mins" ;
@@ -55,10 +56,10 @@ function insertAct(act, db,res) {
     var long = act.long;
     
 
-    var sql = `update user set act_name = ?, time_taken = ?, lat = ?, long = ?,
+    var sql = `update user set act_name = ?, time_taken = ?, lat = ?, long = ?
             where username = ?;`;
 
-    var values = [act_name, time_taken, coords, userName];
+    var values = [act_name, time_taken,lat, long, userName];
 
     db.serialize(function () {
         db.run(sql, values, function (err) {

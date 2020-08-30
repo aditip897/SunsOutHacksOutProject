@@ -17,9 +17,9 @@
         <div class="hero-head">
             <div class="is-fullwidth">
                 <div class="container">
-                   
+
                     <button id="logout" class="button is-rounded is-small">Logout</button>
-                    
+
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
         var hrs = document.getElementById('hrsTxtbx');
         var mins = document.getElementById('minsTxtbx');
         var logoutBtn = document.getElementById('logout');
-
+        var data = {};
         navigator.geolocation.getCurrentPosition(function (position) {
             addBtn.style.display = 'inline-flex';
             var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13)
@@ -95,8 +95,10 @@
             // addBtn.onclick = function () {
             saveBtn.addEventListener("click", function () {
                 mdl.close();
+                data = {"userName" : window.sessionStorage.getItem("userName"), "actName" : activityName.value, "hrs":hrs.value,"mins":mins.value,"lat":position.coords.latitude,"long":position.coords.longitude};
                 L.marker([position.coords.latitude, position.coords.longitude]).bindPopup('Activity: ' + activityName.value + '\n' + '| Time: ' + hrs.value + 'hrs ' + mins.value + 'mins').addTo(mymap);
                 clearTxtbx()
+                saveActivity(data);
                 //make post request
             });
 
@@ -118,8 +120,22 @@
             window.location.href = 'login.html'
         }
 
-        function name(params) {
-            
+        function saveActivity(data) {
+            fetch('http://127.0.0.1:4300/api/act/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                    if (result.success) {
+                        window.location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
 
     </script>
